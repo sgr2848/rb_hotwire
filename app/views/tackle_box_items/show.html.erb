@@ -5,18 +5,18 @@
                 class: ("selected" if @item == item) %>
   <% end %>
 </div>
-
 <div class="selected-item">
   <div class="header">
     <div class="name-category">
       <%= @item.bait.name %> &bull; <%= @item.bait.category %>
     </div>
-    <%= render "stats", fish_catches: @fish_catches %>
+    <div id="stats">
+    <%= render "stats", fish_catches: @fish_catches %></div>
   </div>
-
+<%= turbo_frame_tag "new_catch" do %>
   <%= render "fish_catches/form", fish_catch: @new_catch %>
-
-  <div class="catches">
+<% end %>
+  <div class="catches" id="catchF">
     <%= render @fish_catches %>
   </div>
 </div>
