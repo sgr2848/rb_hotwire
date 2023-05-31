@@ -21,6 +21,7 @@ class FishCatchesController < ApplicationController
     if @fish_catch.update(fish_catch_params)
 
       @fish_catches = fish_catches_for_bait(@fish_catch.bait)
+     flash.now[:notice] = 'Catch was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -32,6 +33,7 @@ class FishCatchesController < ApplicationController
 
       @fish_catches = fish_catches_for_bait(@fish_catch.bait)
       @new_catch = current_user.fish_catches.new(bait: @fish_catch.bait)
+     flash.now[:notice] = 'Catch was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,8 +41,8 @@ class FishCatchesController < ApplicationController
 
   def destroy
     @fish_catch.destroy
-
-      @fish_catches = fish_catches_for_bait(@fish_catch.bait)
+    @fish_catches = fish_catches_for_bait(@fish_catch.bait)
+    flash.now[:notice] = 'Catch was successfully deleted.'
   end
 
 private
