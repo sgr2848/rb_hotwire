@@ -28,14 +28,15 @@ class TackleBoxItemsController < ApplicationController
     @item = current_user.tackle_box_items.create!(bait: @bait)
     # Assigning the item to the box
     @bait.my_tackle_box_item = @item
-    render @bait
+
   end
 
   def destroy
     @item = current_user.tackle_box_items.find(params[:id])
     @item.destroy
     @bait  = @item.bait
-    render @bait
+    # remove the item from the box
+    render :create
   end
 
 end
