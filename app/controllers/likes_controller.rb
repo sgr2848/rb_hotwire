@@ -6,10 +6,11 @@ class LikesController < ApplicationController
     return if existing_like
 
     like = @fish_catch.likes.create!(user: current_user)
-    @fish_catch.my_like = like
-    render partial: "activity/catch_likes",
-            locals: { fish_catch: @fish_catch }
 
+    @fish_catch.my_like = like
+
+    render partial: "activity/catch_likes",
+           locals: { fish_catch: @fish_catch }
   end
 
   def destroy
@@ -17,7 +18,8 @@ class LikesController < ApplicationController
 
     like.destroy!
 
-    redirect_to activity_url
+    render partial: "activity/catch_likes",
+           locals: { fish_catch: @fish_catch }
   end
 
 private
